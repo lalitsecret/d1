@@ -1,0 +1,39 @@
+import React, { Component } from 'react'
+
+export default class App extends Component {
+  state = { email: "", age: "", submitted: false }
+
+  submit(e) {
+    e.preventDefault()
+    let { email, age, submitted } = this.state
+    if(email && age)
+    {
+      this.setState({submitted:true})
+    }
+  }
+
+  handleChange(e) {
+    let { name, value } = e.target
+    this.setState({[name]:value})
+  }
+
+  render() {
+    let { email, age, submitted } = this.state
+    return (
+      <div>
+        <form align="center" autoComplete="off" onSubmit={this.submit.bind(this)}>
+          <p>email</p>
+          <input onChange={this.handleChange.bind(this)} name="email" placeholder='email' />
+          <p>age</p>
+          <input onChange={this.handleChange.bind(this)} name="age" placeholder='age' />
+          <button>submit</button>
+        </form>
+        {
+          submitted
+          &&
+          <h1 align="center">your information is {email} {age}</h1>
+        }
+      </div>
+    )
+  }
+}
